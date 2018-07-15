@@ -1,0 +1,140 @@
+<resources>
+
+    <!--application name-->
+    <string name="app_name">OMAH OLEH-OLEHSAM</string>
+
+    <!--navigation drawer and home menu name-->
+    <string name="menu_product">Produk</string>
+    <string name="menu_cart">Keranjang</string>
+    <string name="menu_checkout">Periksa</string>
+    <string name="menu_profile">Profil</string>
+    <string name="menu_info">Informasi</string>
+    <string name="menu_about">Tentang</string>
+    <string name="menu_share">Bagikan</string>
+    <string name="menu_contact">Kontak</string>
+
+    <!--title bar-->
+    <string name="title_category">Kategori</string>
+    <string name="title_menu">Daftar Barang</string>
+    <string name="title_cart">Keranjang</string>
+    <string name="title_checkout">Daftar Barang</string>
+    <string name="title_confirm">Selamat</string>
+    <string name="title_contact_us">Kontak Kami</string>
+    <string name="title_about">Tentang</string>
+    <string name="title_buy">Beli Barang</string>
+    <string name="title_save">Simpan Gambar</string>
+
+    <!--action-->
+    <string name="action_cart">Keranjang</string>
+    <string name="action_checkout">Proses Periksa</string>
+    <string name="action_buy">Beli Barang</string>
+    <string name="action_save">Simpan Gambar</string>
+    <string name="action_clear">Bersihkan</string>
+
+    <!--information tab name-->
+    <string name="information_tab1">Cara Belanja</string>
+    <string name="information_tab2">Pembayaran</string>
+    <string name="information_tab3">Kontak Kami</string>
+
+    <!--network-->
+    <string name="no_internet">Please, enable internet connection before using this app</string>
+    <string name="alert">Failed to connect internet!</string>
+    <string name="not_found">Product Not Found!</string>
+
+    <!--shipping information on checkout menu-->
+    <string name="shipping_list_1">Gratis Ongkir</string>
+    <string name="shipping_list_2">SIBA</string>
+    <string name="shipping_list_3">POS Indonesia</string>
+    <string name="shipping_list_4">JNE</string>
+    <string name="shipping_list_5">TIKI</string>
+
+    <!--menu, cart and order-->
+    <string name="search">Cari Barang</string>
+    <string name="confirm">Konfirmasi</string>
+    <string name="number_order">Jumlah Barang : </string>
+    <string name="order">Pesan</string>
+    <string name="detail">Detail</string>
+    <string name="total_order">Jumlah Barang :</string>
+    <string name="clear_order">Bersihkan Pesanan</string>
+    <string name="clear_all_order">Apa kamu yakin ,menghapus semua pesanan?</string>
+    <string name="clear_one_order">Apa kamu yakin menghapus pesanan?</string>
+    <string name="db_exist_alert">Apa kamu batal memilih barang ini?</string>
+    <string name="no_order">keranjang anda kosong!.silahkan pilih barang</string>
+    <string name="option_yes">Ya</string>
+    <string name="option_no">Tidak</string>
+
+    <!--checkout menu-->
+    <string name="checkout_your_name">Nama Lengkap</string>
+    <string name="checkout_address">Alamat penerima</string>
+    <string name="checkout_city">Kota</string>
+    <string name="checkout_province">Provinsi</string>
+    <string name="checkout_email">Email</string>
+    <string name="checkout_set_date">Atur Tanggal</string>
+    <string name="checkout_set_time">Atur Waktu</string>
+    <string name="checkout_phone_number">Nomer Ponsel</string>
+    <string name="checkout_order_list">Daftar Pesanan</string>
+    <string name="checkout_add_comment">Komentar (Optional)</string>
+    <string name="checkout_send_order">Kirim</string>
+    <string name="form_alert">Tolong , isi semua.</string>
+    <string name="sending_alert">Mengkirim data. Tunggu sebentar &#8230;</string>
+    <string name="ok_alert">Pesanan anda sudah terkirim.</string>
+    <string name="failed_alert">Pesanan anda gagal terkirim.</string>
+    <string name="order_alert">Anda tidak memiliki barang untuk dipesan</string>
+    <string name="no_order_menu">Tidak ada pesanan</string>
+
+    <!--app about information-->
+    <string name="app_version">Version 1.0</string>
+    <string name="app_copyright">Copyright &#169; 2018 cumaprokerajasih \n All rights reserved</string>
+    <string name="app_email">cumaprokerajasih@gmail.com</string>
+    <string name="share_summary">Bagikan keteman</string>
+    <string name="rate_summary">Berikan Rating dan Komentar</string>
+    <string name="more_summary">Aplikasi lain</string>
+    <string name="title_app_name">Nama Aplikasi</string>
+    <string name="title_app_version">Versi Bangun</string>
+    <string name="title_app_email">Email</string>
+    <string name="title_app_copyright">Copyright</string>
+    <string name="title_app_share">Bagikan</string>
+    <string name="title_app_rate">Rating</string>
+    <string name="title_app_more">Selengkapnya</string>
+    <string name="more_apps">https://play.google.com/store/apps/developer?id=Solodroid</string>
+    <string name="share_content">I Would like to share this with you. Here You Can Download This Application from PlayStore</string>
+
+    <!--contact us-->
+    <string name="hint_email_subject">Judul :</string>
+    <string name="hint_email_message">Pesan :</string>
+    <string name="button_send">Kirim</string>
+
+    <!--nav drawer header image-->
+    <!--set "@string/drawer_content_on" to enable navigation drawer header image-->
+    <!--set "@string/drawer_content_off" to disable navigation drawer header image-->
+    <string name="drawer_visibility">@string/drawer_content_on</string>
+    <string name="drawer_open">Slider Menu Opened</string>
+    <string name="drawer_close">Slider Menu Closed</string>
+    <string name="drawer_content_on">0</string>
+    <string name="drawer_content_off">2</string>
+    <string name="menu_logout">Keluar</string>
+    <string name="email">Email</string>
+    <string name="password">Katasandi</string>
+    <string name="login">Masuk</string>
+    <string name="register_caption">Daftar</string>
+    <string name="title_activity_login">Silahkan Masuk</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Katasandi (optional)</string>
+    <string name="action_sign_in">Silahkan masuk atau daftar</string>
+    <string name="action_sign_in_short">Silahkan daftar</string>
+    <string name="error_invalid_email">Email ini tidak tersedia</string>
+    <string name="error_invalid_password">Katasandi ini terlalu pendek</string>
+    <string name="error_incorrect_password">Katasandi tidak sama</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Hubungi kontak kami jika terjadi kendala"
+    </string>
+    <string name="penilaian">Penilaian</string>
+    <string name="namalengkap">Nama Lengkap  : </string>
+    <string name="nama">Anggada Ramadhan</string>
+    <string name="ttl">Tanggal Lahir  : </string>
+    <string name="jk">Jenis Kelamin  : </string>
+    <string name="app_selamat">Selamat datang ,bukan liburan kalau tidak membawa oleh-oleh </string>
+
+</resources>

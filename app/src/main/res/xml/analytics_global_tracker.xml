@@ -7,9 +7,9 @@
     <bool name="ga_dryRun">false</bool>
 
     <!-- The screen name that will appear in reports -->
-    <string name="com.solodroid.ecommerce.activities.MainActivity">MainActivity</string>
-    <string name="com.solodroid.ecommerce.activities.ActivityMenuCategory">Product Category</string>
-    <string name="com.solodroid.ecommerce.activities.ActivityMenuList">Product List</string>
-    <string name="com.solodroid.ecommerce.activities.ActivityMenuDetail">Product Details</string>
+    <string name="com.cumaprokerajasih.o2sApp.activities.MainActivity">MainActivity</string>
+    <string name="com.cumaprokerajasih.o2sApp.activities.ActivityMenuCategory">Product Category</string>
+    <string name="com.cumaprokerajasih.o2sApp.activities.ActivityMenuList">Product List</string>
+    <string name="com.cumaprokerajasih.o2sApp.activities.ActivityMenuDetail">Product Details</string>
 
 </resources>

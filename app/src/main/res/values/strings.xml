@@ -136,5 +136,9 @@
     <string name="ttl">Tanggal Lahir  : </string>
     <string name="jk">Jenis Kelamin  : </string>
     <string name="app_selamat">Selamat datang ,bukan liburan kalau tidak membawa oleh-oleh </string>
+    <string name="provinsi">Provinsi</string>
+    <string name="kot_kab">Kot/Kab</string>
+    <string name="kecamatan">Kecamatan</string>
+    <string name="kelurahan_desa">Kelurahan/Desa</string>
 
 </resources>

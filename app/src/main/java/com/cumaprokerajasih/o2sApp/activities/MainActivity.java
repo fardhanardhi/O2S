@@ -23,7 +23,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.onesignal.OneSignal;
 import com.cumaprokerajasih.o2sApp.R;
 import com.cumaprokerajasih.o2sApp.analytics.Analytics;
 import com.cumaprokerajasih.o2sApp.fragments.FragmentHome;
@@ -48,20 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        OneSignal.idsAvailable(new OneSignal.IdsAvailableHandler() {
-            @Override
-            public void idsAvailable(String userId, String registrationId) {
-                String text = "OneSignal UserID:\n" + userId + "\n\n";
-
-                if (registrationId != null)
-                    text += "Google Registration Id:\n" + registrationId;
-                else
-                    text += "Google Registration Id:\nCould not subscribe for push";
-
-                TextView textView = (TextView) findViewById(R.id.debug_view);
-                textView.setText(text);
-            }
-        });
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
@@ -93,10 +78,6 @@ public class MainActivity extends AppCompatActivity {
 
                 if (menuItem.getItemId() == R.id.information) {
                     startActivity(new Intent(getApplicationContext(), ActivityInformation.class));
-                }
-
-                if (menuItem.getItemId() == R.id.about) {
-                    startActivity(new Intent(getApplicationContext(), ActivityAbout.class));
                 }
                 if (menuItem.getItemId() == R.id.logout) {
                    onDestroy();

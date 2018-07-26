@@ -72,7 +72,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <AutoCompleteTextView
-                android:id="@+id/acttext_prov"
+                android:id="@+id/actext_namaprov"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/provinsi"/>

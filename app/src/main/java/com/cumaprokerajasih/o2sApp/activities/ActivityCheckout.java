@@ -68,6 +68,13 @@ import meridianid.farizdotid.actdaerahindonesia.adapter.SuggestionProvAdapter;
 import meridianid.farizdotid.actdaerahindonesia.util.JsonParse;
 
 public class ActivityCheckout extends AppCompatActivity {
+	private static final String TAG = ActivityCheckout.class.getSimpleName();
+	private AutoCompleteTextView actext_namaprov;
+	private AutoCompleteTextView actext_namaprovdb;
+	String[] namaProvinsi = {"Jawa Barat", "Jawa Timur", "Jawa Tengah", "Kalimantan", "Sulawesi", "Bali"};
+	private DBHelperNamaProvinsi dbHelperNamaProvinsi;
+
+
 
 	Button btnSend;
 	static Button btnDate;
@@ -115,6 +122,13 @@ public class ActivityCheckout extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
+
+		dbHelperNamaProvinsi = new DBHelperNamaProvinsi(this);
+		dbHelperNamaProvinsi.loadContent();
+
+		initAutoCompleteNamaProv();
+//		initAutoCompleteNamaProvDB();
+
 		final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 		final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
@@ -127,7 +141,7 @@ public class ActivityCheckout extends AppCompatActivity {
 
 		edtName = (EditText) findViewById(R.id.edtName);
         edtName2 = (EditText) findViewById(R.id.edtName2);
-		acttext_prov = (AutoCompleteTextView) findViewById(R.id.acttext_prov);
+		acttext_prov = (AutoCompleteTextView) findViewById(R.id.actext_namaprov);
 		acttext_kab = (AutoCompleteTextView) findViewById(R.id.acttext_kab);
 		acttext_kec = (AutoCompleteTextView) findViewById(R.id.acttext_kec);
 		acttext_desa = (AutoCompleteTextView) findViewById(R.id.acttext_desa);
@@ -143,47 +157,47 @@ public class ActivityCheckout extends AppCompatActivity {
         txtAlert = (TextView) findViewById(R.id.txtAlert);
         edtAlamat = (EditText) findViewById(R.id.edtAlamat);
 
-		acttext_prov.setAdapter(new SuggestionProvAdapter(this, acttext_prov.getText().toString()));
-		acttext_prov.setThreshold(1);
-		acttext_prov.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				String namaProv = parent.getItemAtPosition(position).toString();
-				jsonParse.searchIdProv(namaProv);
-			}
-		});
-
-		acttext_kab.setAdapter(new SuggestionKabAdapter(this, acttext_prov.getText().toString(),
-				acttext_kab.getText().toString()));
-		acttext_kab.setThreshold(1);
-		acttext_kab.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				String namaKab = parent.getItemAtPosition(position).toString();
-				jsonParse.searchIdKab(namaKab);
-			}
-		});
-
-		acttext_kec.setAdapter(new SuggestionKecAdapter(this, acttext_kab.getText().toString(),
-				acttext_kec.getText().toString()));
-		acttext_kec.setThreshold(1);
-		acttext_kec.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				String namaKec = parent.getItemAtPosition(position).toString();
-				jsonParse.searchIdKec(namaKec);
-			}
-		});
-
-		acttext_desa.setAdapter(new SuggestionDesaAdapter(this, acttext_kec.getText().toString(),
-				acttext_desa.getText().toString()));
-		acttext_desa.setThreshold(1);
-		acttext_desa.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-			}
-		});
+//		acttext_prov.setAdapter(new SuggestionProvAdapter(this, acttext_prov.getText().toString()));
+//		acttext_prov.setThreshold(1);
+//		acttext_prov.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//				String namaProv = parent.getItemAtPosition(position).toString();
+//				jsonParse.searchIdProv(namaProv);
+//			}
+//		});
+//
+//		acttext_kab.setAdapter(new SuggestionKabAdapter(this, acttext_prov.getText().toString(),
+//				acttext_kab.getText().toString()));
+//		acttext_kab.setThreshold(1);
+//		acttext_kab.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//				String namaKab = parent.getItemAtPosition(position).toString();
+//				jsonParse.searchIdKab(namaKab);
+//			}
+//		});
+//
+//		acttext_kec.setAdapter(new SuggestionKecAdapter(this, acttext_kab.getText().toString(),
+//				acttext_kec.getText().toString()));
+//		acttext_kec.setThreshold(1);
+//		acttext_kec.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//				String namaKec = parent.getItemAtPosition(position).toString();
+//				jsonParse.searchIdKec(namaKec);
+//			}
+//		});
+//
+//		acttext_desa.setAdapter(new SuggestionDesaAdapter(this, acttext_kec.getText().toString(),
+//				acttext_desa.getText().toString()));
+//		acttext_desa.setThreshold(1);
+//		acttext_desa.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//			}
+//		});
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner1);
 	     // Create an ArrayAdapter using the string array and a default spinner layout
@@ -290,6 +304,40 @@ public class ActivityCheckout extends AppCompatActivity {
 			}
 		});
     }
+
+//	private void initAutoCompleteNamaProv(){
+//		actext_namaprov = (AutoCompleteTextView) findViewById(R.id.actext_namaprov);
+//
+//		ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, namaProvinsi);
+//		actext_namaprov.setAdapter(adapter);
+//		actext_namaprov.setThreshold(1);
+//
+//		actext_namaprov.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//				Toast.makeText(ActivityCheckout.this, (CharSequence) parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+//			}
+//		});
+//	}
+
+	private void initAutoCompleteNamaProv(){
+		actext_namaprov = (AutoCompleteTextView) findViewById(R.id.actext_namaprov);
+
+		final String[] namaProv = dbHelperNamaProvinsi.SelectAllDataNamaProv();
+		ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, namaProv);
+		actext_namaprov.setAdapter(adapter);
+		actext_namaprov.setThreshold(1);
+		actext_namaprov.dismissDropDown();
+
+		actext_namaprov.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Toast.makeText(ActivityCheckout.this, (CharSequence) parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
+
+
 
 
 	@Override

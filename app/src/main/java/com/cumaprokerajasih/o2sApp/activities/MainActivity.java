@@ -3,6 +3,7 @@ package com.cumaprokerajasih.o2sApp.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.database.SQLException;
 import android.os.Build;
@@ -24,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.net.Uri;
 
 import com.cumaprokerajasih.o2sApp.R;
 import com.cumaprokerajasih.o2sApp.analytics.Analytics;
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("myTag", "This is my message");
+                startActivity(new Intent(getApplicationContext(), ActivityInformation.class));
             }
         });
 
@@ -84,10 +86,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (menuItem.getItemId() == R.id.logout) {
                    onDestroy();
-                    finish();
-                }
-                if (menuItem.getItemId() == R.id.logout) {
-                    onDestroy();
                     finish();
                 }
                 return false;

@@ -46,6 +46,18 @@
                 android:id="@+id/debug_view"
                 android:visibility="gone"/>
 
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_alignParentRight="true"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:src="@drawable/ic_drawer_about"
+                android:layout_margin="16dp" />
+
         </RelativeLayout>
 
     </RelativeLayout>

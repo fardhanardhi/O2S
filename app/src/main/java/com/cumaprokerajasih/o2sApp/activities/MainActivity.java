@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.database.SQLException;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
@@ -20,6 +21,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.help);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("myTag", "This is my message");
+            }
+        });
+
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
@@ -72,9 +82,12 @@ public class MainActivity extends AppCompatActivity {
                 if (menuItem.getItemId() == R.id.profile) {
                     startActivity(new Intent(getApplicationContext(), ActivityProfile.class));
                 }
-
                 if (menuItem.getItemId() == R.id.logout) {
                    onDestroy();
+                    finish();
+                }
+                if (menuItem.getItemId() == R.id.logout) {
+                    onDestroy();
                     finish();
                 }
                 return false;

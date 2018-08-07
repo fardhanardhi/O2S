@@ -125,21 +125,6 @@ public class ActivityMenuDetail extends AppCompatActivity {
             }
         });
 
-        com.github.clans.fab.FloatingActionButton fab3 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.checkout);
-        fab3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ActivityCheckout.class));
-            }
-        });
-
-        com.github.clans.fab.FloatingActionButton fab4 = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.save);
-        fab4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                (new SaveTask(ActivityMenuDetail.this)).execute(Config.ADMIN_PANEL_URL + "/" + Menu_image);
-            }
-        });
 
         //imageLoader = new ImageLoader(ActivityMenuDetail.this);
         dbhelper = new DBHelper(this);
@@ -175,21 +160,12 @@ public class ActivityMenuDetail extends AppCompatActivity {
                 this.finish();
                 return true;
 
-            case R.id.buy:
-                inputDialog();
+
+            case R.id.help:
+                startActivity(new Intent(getApplicationContext(), ActivityInformation.class));
                 return true;
 
-            case R.id.cart:
-                startActivity(new Intent(getApplicationContext(), ActivityCart.class));
-                return true;
 
-            case R.id.checkout:
-                startActivity(new Intent(getApplicationContext(), ActivityCheckout.class));
-                return true;
-
-            case R.id.save:
-                (new SaveTask(ActivityMenuDetail.this)).execute(Config.ADMIN_PANEL_URL + "/" + Menu_image);
-                return true;
 
             default:
                 return super.onOptionsItemSelected(item);

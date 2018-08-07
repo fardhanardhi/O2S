@@ -142,22 +142,6 @@
                 fab:fab_size="mini"
                 fab:fab_label="@string/action_cart" />
 
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/checkout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_checkout_circle"
-                fab:fab_size="mini"
-                fab:fab_label="@string/action_checkout" />
-
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_save"
-                fab:fab_size="mini"
-                fab:fab_label="@string/action_save" />
-
         </com.github.clans.fab.FloatingActionMenu>
 
     </android.support.design.widget.CoordinatorLayout>

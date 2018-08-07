@@ -28,4 +28,5 @@ public class Analytics extends Application {
         }
         return mTracker;
     }
+
 }

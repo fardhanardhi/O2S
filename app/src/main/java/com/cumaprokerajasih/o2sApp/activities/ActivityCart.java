@@ -93,24 +93,6 @@ public class ActivityCart extends AppCompatActivity {
             getSupportActionBar().setTitle(R.string.title_cart);
         }
 
-        FloatingActionButton clear = (FloatingActionButton) findViewById(R.id.fabClear);
-        clear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showClearDialog(CLEAR_ALL_ORDER, 1111);
-            }
-        });
-
-        FloatingActionButton checkout = (FloatingActionButton) findViewById(R.id.fabCheckout);
-        checkout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dbhelper.close();
-                Intent i = new Intent(ActivityCart.this, ActivityCheckout.class);
-                startActivity(i);
-            }
-        });
-
         // connect view objects with xml id
         prgLoading = (ProgressBar) findViewById(R.id.prgLoading);
         listOrder = (ListView) findViewById(R.id.listOrder);

@@ -17,7 +17,7 @@
     <string name="title_category">Kategori</string>
     <string name="title_menu">Daftar Barang</string>
     <string name="title_cart">Keranjang</string>
-    <string name="title_checkout">Daftar Barang</string>
+    <string name="title_checkout">Data Pelanggan</string>
     <string name="title_confirm">Selamat</string>
     <string name="title_contact_us">Kontak Kami</string>
     <string name="title_about">Tentang</string>
@@ -42,11 +42,10 @@
     <string name="not_found">Product Not Found!</string>
 
     <!--shipping information on checkout menu-->
-    <string name="shipping_list_1">Gratis Ongkir</string>
-    <string name="shipping_list_2">SIBA</string>
+    <string name="shipping_list_1">SIBA</string>
+    <string name="shipping_list_2">TIKI</string>
     <string name="shipping_list_3">POS Indonesia</string>
     <string name="shipping_list_4">JNE</string>
-    <string name="shipping_list_5">TIKI</string>
 
     <!--menu, cart and order-->
     <string name="search">Cari Barang</string>
@@ -65,7 +64,7 @@
 
     <!--checkout menu-->
     <string name="checkout_your_name">Nama Lengkap</string>
-    <string name="checkout_address">Alamat penerima</string>
+    <string name="checkout_address">Alamat Jelas Penerima</string>
     <string name="checkout_city">Kota</string>
     <string name="checkout_province">Provinsi</string>
     <string name="checkout_email">Email</string>
@@ -96,7 +95,6 @@
     <string name="title_app_share">Bagikan</string>
     <string name="title_app_rate">Rating</string>
     <string name="title_app_more">Selengkapnya</string>
-    <string name="more_apps">https://play.google.com/store/apps/developer?id=Solodroid</string>
     <string name="share_content">I Would like to share this with you. Here You Can Download This Application from PlayStore</string>
 
     <!--contact us-->
@@ -136,10 +134,13 @@
     <string name="ttl">Tanggal Lahir  : </string>
     <string name="jk">Jenis Kelamin  : </string>
     <string name="app_selamat">Selamat datang ,bukan liburan kalau tidak membawa oleh-oleh </string>
+    <string name="information">Bantuan</string>
     <string name="provinsi">Provinsi</string>
-    <string name="provinsidb">ProvinsiDB</string>
-    <string name="kot_kab">Kot/Kab</string>
+    <string name="kot">Kota</string>
+    <string name="help">Bantuan</string>
+    <string name="action_tambah">Tambah</string>
     <string name="kecamatan">Kecamatan</string>
-    <string name="kelurahan_desa">Kelurahan/Desa</string>
+    <string name="kelurahan">Kelurahan</string>
+    <string name="action_add">Tambah Order</string>
 
 </resources>

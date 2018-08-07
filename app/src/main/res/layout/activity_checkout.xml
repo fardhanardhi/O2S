@@ -71,33 +71,61 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <AutoCompleteTextView
-                android:id="@+id/actext_namaprov"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/TextInputLayout3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/provinsi"/>
+                android:layout_height="wrap_content">
 
-            <AutoCompleteTextView
-                android:id="@+id/acttext_kab"
-                android:layout_marginTop="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/kot_kab"/>
+                <AutoCompleteTextView
+                    android:id="@+id/acttext_prov"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/provinsi"/>
 
-            <AutoCompleteTextView
-                android:id="@+id/acttext_kec"
-                android:layout_marginTop="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/kecamatan"/>
+            </android.support.design.widget.TextInputLayout>
 
-            <AutoCompleteTextView
-                android:id="@+id/acttext_desa"
-                android:layout_marginTop="12dp"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/TextInputLayout4"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/kelurahan_desa"/>
-            
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/acttext_kab"
+                    android:layout_marginTop="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/kot"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/TextInputLayout6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/acttext_kecamatan"
+                    android:layout_marginTop="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/kecamatan"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/TextInputLayout9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/acttext_kel"
+                    android:layout_marginTop="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/kelurahan"/>
+
+            </android.support.design.widget.TextInputLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >

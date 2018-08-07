@@ -68,17 +68,11 @@ public class MainActivity extends AppCompatActivity {
                 //mDrawerLayout.closeDrawers();
                 //setTitle(menuItem.getTitle());
 
-                if (menuItem.getItemId() == R.id.checkout) {
-                    startActivity(new Intent(getApplicationContext(), ActivityCheckout.class));
-                }
 
                 if (menuItem.getItemId() == R.id.profile) {
                     startActivity(new Intent(getApplicationContext(), ActivityProfile.class));
                 }
 
-                if (menuItem.getItemId() == R.id.information) {
-                    startActivity(new Intent(getApplicationContext(), ActivityInformation.class));
-                }
                 if (menuItem.getItemId() == R.id.logout) {
                    onDestroy();
                     finish();

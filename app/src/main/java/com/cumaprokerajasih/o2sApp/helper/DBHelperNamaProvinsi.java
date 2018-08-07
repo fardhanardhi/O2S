@@ -1,4 +1,4 @@
-package com.cumaprokerajasih.o2sApp.activities;
+package com.cumaprokerajasih.o2sApp.helper;
 
 import android.content.ContentValues;
 import android.content.Context;

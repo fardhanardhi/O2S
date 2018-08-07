@@ -34,6 +34,7 @@ import android.widget.Toast;
 
 import com.cumaprokerajasih.o2sApp.Config;
 import com.cumaprokerajasih.o2sApp.R;
+import com.cumaprokerajasih.o2sApp.helper.DBHelperNamaProvinsi;
 import com.cumaprokerajasih.o2sApp.utilities.DBHelper;
 
 import org.apache.http.HttpResponse;
@@ -60,39 +61,29 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import meridianid.farizdotid.actdaerahindonesia.adapter.SuggestionDesaAdapter;
-import meridianid.farizdotid.actdaerahindonesia.adapter.SuggestionKabAdapter;
-import meridianid.farizdotid.actdaerahindonesia.adapter.SuggestionKecAdapter;
-import meridianid.farizdotid.actdaerahindonesia.adapter.SuggestionProvAdapter;
-import meridianid.farizdotid.actdaerahindonesia.util.JsonParse;
+//import android.widget.CheckBox;
 
 public class ActivityCheckout extends AppCompatActivity {
-	private static final String TAG = ActivityCheckout.class.getSimpleName();
-	private AutoCompleteTextView actext_namaprov;
+	private static final String TAG = MainActivity.class.getSimpleName();
+
 	private AutoCompleteTextView actext_namaprovdb;
-	String[] namaProvinsi = {"Jawa Barat", "Jawa Timur", "Jawa Tengah", "Kalimantan", "Sulawesi", "Bali"};
 	private DBHelperNamaProvinsi dbHelperNamaProvinsi;
-
-
-
 	Button btnSend;
 	static Button btnDate;
 	static Button btnTime;
 	EditText edtName, edtName2, edtPhone, edtOrderList, edtComment, edtAlamat, edtEmail;
-	AutoCompleteTextView acttext_prov , acttext_kab , acttext_kec ,acttext_desa;
-	private JsonParse jsonParse;
+	AutoCompleteTextView acttext_prov ,acttext_kab,acttext_kec,acttext_desa;
 	ScrollView sclDetail;
 	ProgressBar prgLoading;
 	TextView txtAlert;
 	Spinner spinner;
-
+	
 	// declare dbhelper object
 	public static DBHelper dbhelper;
 	ArrayList<ArrayList<Object>> data;
-
+	
 	// declare string variables to store data
-	String Name, Name2, Date, Time, Phone, Date_n_Time, Alamat, Email;
+	String Name, Name2, Date, Time, Phone, Date_n_Time, Alamat, Email, Provinsi,Kota,Keca,Kelu;
 	String OrderList = "";
 	String Comment = "";
 
@@ -102,7 +93,7 @@ public class ActivityCheckout extends AppCompatActivity {
 	private static int mDay;
 	private static int mHour;
 	private static int mMinute;
-
+	
 	// declare static variables to store tax and currency data
 	public static double Tax;
 	public static String Currency;
@@ -117,17 +108,16 @@ public class ActivityCheckout extends AppCompatActivity {
 	String TaxCurrencyAPI;
 	int IOConnect = 0;
 
-
-    @Override
+	@Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_checkout);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_checkout);
 
 		dbHelperNamaProvinsi = new DBHelperNamaProvinsi(this);
 		dbHelperNamaProvinsi.loadContent();
 
-		initAutoCompleteNamaProv();
-//		initAutoCompleteNamaProvDB();
+		initAutoCompleteNamaProvDB();
+
 
 		final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
@@ -137,14 +127,9 @@ public class ActivityCheckout extends AppCompatActivity {
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 			getSupportActionBar().setTitle(R.string.title_checkout);
 		}
-		jsonParse = new JsonParse(this);
 
-		edtName = (EditText) findViewById(R.id.edtName);
+        edtName = (EditText) findViewById(R.id.edtName);
         edtName2 = (EditText) findViewById(R.id.edtName2);
-		acttext_prov = (AutoCompleteTextView) findViewById(R.id.actext_namaprov);
-		acttext_kab = (AutoCompleteTextView) findViewById(R.id.acttext_kab);
-		acttext_kec = (AutoCompleteTextView) findViewById(R.id.acttext_kec);
-		acttext_desa = (AutoCompleteTextView) findViewById(R.id.acttext_desa);
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         btnDate = (Button) findViewById(R.id.btnDate);
         btnTime = (Button) findViewById(R.id.btnTime);
@@ -154,51 +139,13 @@ public class ActivityCheckout extends AppCompatActivity {
         btnSend = (Button) findViewById(R.id.btnSend);
         sclDetail = (ScrollView) findViewById(R.id.sclDetail);
         prgLoading = (ProgressBar) findViewById(R.id.prgLoading);
-        txtAlert = (TextView) findViewById(R.id.txtAlert);
+        txtAlert = (TextView) findViewById(R.id.txtAlert);       
         edtAlamat = (EditText) findViewById(R.id.edtAlamat);
-
-//		acttext_prov.setAdapter(new SuggestionProvAdapter(this, acttext_prov.getText().toString()));
-//		acttext_prov.setThreshold(1);
-//		acttext_prov.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//				String namaProv = parent.getItemAtPosition(position).toString();
-//				jsonParse.searchIdProv(namaProv);
-//			}
-//		});
-//
-//		acttext_kab.setAdapter(new SuggestionKabAdapter(this, acttext_prov.getText().toString(),
-//				acttext_kab.getText().toString()));
-//		acttext_kab.setThreshold(1);
-//		acttext_kab.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//				String namaKab = parent.getItemAtPosition(position).toString();
-//				jsonParse.searchIdKab(namaKab);
-//			}
-//		});
-//
-//		acttext_kec.setAdapter(new SuggestionKecAdapter(this, acttext_kab.getText().toString(),
-//				acttext_kec.getText().toString()));
-//		acttext_kec.setThreshold(1);
-//		acttext_kec.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//				String namaKec = parent.getItemAtPosition(position).toString();
-//				jsonParse.searchIdKec(namaKec);
-//			}
-//		});
-//
-//		acttext_desa.setAdapter(new SuggestionDesaAdapter(this, acttext_kec.getText().toString(),
-//				acttext_desa.getText().toString()));
-//		acttext_desa.setThreshold(1);
-//		acttext_desa.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//			}
-//		});
-
+		acttext_prov = (AutoCompleteTextView) findViewById(R.id.acttext_prov);
+		acttext_kab = (AutoCompleteTextView) findViewById(R.id.acttext_kab);
+		acttext_kec = (AutoCompleteTextView) findViewById(R.id.acttext_kecamatan);
+		acttext_desa = (AutoCompleteTextView) findViewById(R.id.acttext_kel);
+        
         Spinner spinner = (Spinner) findViewById(R.id.spinner1);
 	     // Create an ArrayAdapter using the string array and a default spinner layout
 	     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -207,16 +154,16 @@ public class ActivityCheckout extends AppCompatActivity {
 	     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	     // Apply the adapter to the spinner
 	     spinner.setAdapter(adapter);
-
+	     
 	     spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-
+	    	 
 				@Override
 				public void onItemSelected(AdapterView<?> arg0, View arg1,
 						int arg2, long arg3) {
 					// TODO Auto-generated method stub
-
+					
 					switch(arg2) {
-
+					
 						case 0 :
 							edtName2.setText(R.string.shipping_list_1);
 							break;
@@ -229,19 +176,19 @@ public class ActivityCheckout extends AppCompatActivity {
 						default :
 							edtName2.setText(R.string.shipping_list_4);
 							break;
-					}
+					}				
 				}
-
+				
 				@Override
 				public void onNothingSelected(AdapterView<?> arg0) {
 					// TODO Auto-generated method stub
-
+					
 				}
 			});
 
         // tax and currency API url
 		TaxCurrencyAPI = Config.ADMIN_PANEL_URL + "/api/get-tax-and-currency.php" + "?accesskey="+Config.AccessKey;
-
+        
         dbhelper = new DBHelper(this);
         // open database
 		try{
@@ -249,13 +196,13 @@ public class ActivityCheckout extends AppCompatActivity {
 		}catch(SQLException sqle){
 			throw sqle;
 		}
-
+		
 		// call asynctask class to request tax and currency data from server
-        new getTaxCurrency().execute();
-
+        new getTaxCurrency().execute();        
+        
         // event listener to handle date button when pressed
         btnDate.setOnClickListener(new OnClickListener() {
-
+			
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				// show date picker dialog
@@ -263,10 +210,10 @@ public class ActivityCheckout extends AppCompatActivity {
 			    newFragment.show(getSupportFragmentManager(), DATE_DIALOG_ID);
 			}
 		});
-
+        
         // event listener to handle time button when pressed
         btnTime.setOnClickListener(new OnClickListener() {
-
+			
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				// show time picker dialog
@@ -280,10 +227,14 @@ public class ActivityCheckout extends AppCompatActivity {
 
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-
+				
 				// get data from all forms and send to server
 				Name = edtName.getText().toString();
 				Alamat = edtAlamat.getText().toString();
+				Provinsi = acttext_prov.getText().toString();
+				Kota = acttext_kab.getText().toString();
+				Keca = acttext_kec.getText().toString();
+				Kelu = acttext_desa.getText().toString();
 				Email = edtEmail.getText().toString();
 				Name2 = edtName2.getText().toString();
 				Date = btnDate.getText().toString();
@@ -291,7 +242,8 @@ public class ActivityCheckout extends AppCompatActivity {
 				Phone = edtPhone.getText().toString();
 				Comment = edtComment.getText().toString();
 				Date_n_Time = Date+" "+Time;
-				if(Name.equalsIgnoreCase("") || Name2.equalsIgnoreCase("") || Email.equalsIgnoreCase("") || Alamat.equalsIgnoreCase("")  ||
+				if(Name.equalsIgnoreCase("") || Name2.equalsIgnoreCase("") || Email.equalsIgnoreCase("") || Alamat.equalsIgnoreCase("") || Provinsi.equalsIgnoreCase("") || Kota.equalsIgnoreCase("") ||
+						Keca.equalsIgnoreCase("") ||Kelu.equalsIgnoreCase("") ||
 						Date.equalsIgnoreCase(getString(R.string.checkout_set_date)) ||
 						Time.equalsIgnoreCase(getString(R.string.checkout_set_time)) ||
 						Phone.equalsIgnoreCase("")){
@@ -305,31 +257,16 @@ public class ActivityCheckout extends AppCompatActivity {
 		});
     }
 
-//	private void initAutoCompleteNamaProv(){
-//		actext_namaprov = (AutoCompleteTextView) findViewById(R.id.actext_namaprov);
-//
-//		ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, namaProvinsi);
-//		actext_namaprov.setAdapter(adapter);
-//		actext_namaprov.setThreshold(1);
-//
-//		actext_namaprov.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//				Toast.makeText(ActivityCheckout.this, (CharSequence) parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
-//			}
-//		});
-//	}
+	private void initAutoCompleteNamaProvDB() {
+		actext_namaprovdb = (AutoCompleteTextView) findViewById(R.id.acttext_prov);
 
-	private void initAutoCompleteNamaProv(){
-		actext_namaprov = (AutoCompleteTextView) findViewById(R.id.actext_namaprov);
+		final String[] namaProvDB = dbHelperNamaProvinsi.SelectAllDataNamaProv();
+		ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, namaProvDB);
+		actext_namaprovdb.setAdapter(adapter);
+		actext_namaprovdb.setThreshold(1);
+		actext_namaprovdb.dismissDropDown();
 
-		final String[] namaProv = dbHelperNamaProvinsi.SelectAllDataNamaProv();
-		ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, namaProv);
-		actext_namaprov.setAdapter(adapter);
-		actext_namaprov.setThreshold(1);
-		actext_namaprov.dismissDropDown();
-
-		actext_namaprov.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		actext_namaprovdb.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Toast.makeText(ActivityCheckout.this, (CharSequence) parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
@@ -337,33 +274,30 @@ public class ActivityCheckout extends AppCompatActivity {
 		});
 	}
 
-
-
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		switch (item.getItemId()) {
-
+			
 		case android.R.id.home:
             // app icon in action bar clicked; go home
         	this.finish();
 			return true;
-
+			
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
-
+    
     // method to create date picker dialog
     public static class DatePickerFragment extends DialogFragment
     implements DatePickerDialog.OnDateSetListener {
@@ -375,17 +309,17 @@ public class ActivityCheckout extends AppCompatActivity {
 			int year = c.get(Calendar.YEAR);
 			int month = c.get(Calendar.MONTH);
 			int day = c.get(Calendar.DAY_OF_MONTH);
-
+			
 			// Create a new instance of DatePickerDialog and return it
 			return new DatePickerDialog(getActivity(), this, year, month, day);
 		}
-
+		
 		public void onDateSet(DatePicker view, int year, int month, int day) {
 			// get selected date
 			mYear = year;
 			mMonth = month;
 			mDay = day;
-
+			
 			// show selected date to date button
 			btnDate.setText(new StringBuilder()
     		.append(mYear).append("-")
@@ -393,7 +327,7 @@ public class ActivityCheckout extends AppCompatActivity {
     		.append(mDay).append(" "));
 		}
     }
-
+    
     // method to create time picker dialog
     public static class TimePickerFragment extends DialogFragment
     implements TimePickerDialog.OnTimeSetListener {
@@ -404,28 +338,28 @@ public class ActivityCheckout extends AppCompatActivity {
 			final Calendar c = Calendar.getInstance();
 	        int hour = c.get(Calendar.HOUR_OF_DAY);
 	        int minute = c.get(Calendar.MINUTE);
-
+			
 			// Create a new instance of DatePickerDialog and return it
 			return new TimePickerDialog(getActivity(), this, hour, minute,
 	                DateFormat.is24HourFormat(getActivity()));
 		}
-
+		
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			// get selected time
 			mHour = hourOfDay;
 			mMinute = minute;
-
+			
 			// show selected time to time button
 			btnTime.setText(new StringBuilder()
             .append(pad(mHour)).append(":")
             .append(pad(mMinute)).append(":")
-            .append("00"));
+            .append("00")); 	
 		}
     }
 
     // asynctask class to handle parsing json in background
     public class getTaxCurrency extends AsyncTask<Void, Void, Void>{
-
+    	
     	// show progressbar first
     	getTaxCurrency(){
 	 		if(!prgLoading.isShown()){
@@ -433,7 +367,7 @@ public class ActivityCheckout extends AppCompatActivity {
 				txtAlert.setVisibility(View.GONE);
 	 		}
 	 	}
-
+    	
 		@Override
 		protected Void doInBackground(Void... arg0) {
 			// TODO Auto-generated method stub
@@ -441,7 +375,7 @@ public class ActivityCheckout extends AppCompatActivity {
 			parseJSONDataTax();
 			return null;
 		}
-
+    	
 		@Override
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
@@ -456,10 +390,10 @@ public class ActivityCheckout extends AppCompatActivity {
 			}
 		}
     }
-
+    
     // method to parse json data from server
 	public void parseJSONDataTax(){
-
+	
 		try {
 			// request data from tax and currency API
 	        HttpClient client = new DefaultHttpClient();
@@ -468,31 +402,31 @@ public class ActivityCheckout extends AppCompatActivity {
 	        HttpUriRequest request = new HttpGet(TaxCurrencyAPI);
 			HttpResponse response = client.execute(request);
 			InputStream atomInputStream = response.getEntity().getContent();
-
-
+	
+			
 			BufferedReader in = new BufferedReader(new InputStreamReader(atomInputStream));
-
+		        
 	        String line;
 	        String str = "";
 	        while ((line = in.readLine()) != null){
 	        	str += line;
 	        }
-
+	    
 	        // parse json data and store into tax and currency variables
 			JSONObject json = new JSONObject(str);
 			JSONArray data = json.getJSONArray("data"); // this is the "items: [ ] part
-
-
-			JSONObject object_tax = data.getJSONObject(0);
+				
+				
+			JSONObject object_tax = data.getJSONObject(0); 
 			JSONObject tax = object_tax.getJSONObject("tax_n_currency");
-
+			    
 			Tax = Double.parseDouble(tax.getString("Value"));
-
-			JSONObject object_currency = data.getJSONObject(1);
+				   
+			JSONObject object_currency = data.getJSONObject(1); 
 			JSONObject currency = object_currency.getJSONObject("tax_n_currency");
-
+				    
 			Currency = currency.getString("Value");
-
+					
 		} catch (MalformedURLException e) {
 		    // TODO Auto-generated catch block
 		    e.printStackTrace();
@@ -503,48 +437,48 @@ public class ActivityCheckout extends AppCompatActivity {
 		} catch (JSONException e) {
 		    // TODO Auto-generated catch block
 		    e.printStackTrace();
-		}
+		}	
 	}
-
+	
 	// asynctask class to get data from database in background
     public class getDataTask extends AsyncTask<Void, Void, Void>{
-
-
+    	
+    	
 		@Override
 		protected Void doInBackground(Void... arg0) {
 			// TODO Auto-generated method stub
 			getDataFromDatabase();
 			return null;
 		}
-
+    	
 		@Override
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
 			// hide progressbar and show reservation form
 			prgLoading.setVisibility(View.GONE);
 			sclDetail.setVisibility(View.VISIBLE);
-
+			
 		}
     }
-
+    
     // asynctask class to send data to server in background
     public class sendData extends AsyncTask<Void, Void, Void> {
 		ProgressDialog dialog;
-
+		
 		// show progress dialog
 		@Override
 		 protected void onPreExecute() {
 		  // TODO Auto-generated method stub
-			 dialog= ProgressDialog.show(ActivityCheckout.this, "",
+			 dialog= ProgressDialog.show(ActivityCheckout.this, "", 
 	                 getString(R.string.sending_alert), true);
-
+		  	
 		 }
 
 		 @Override
 		 protected Void doInBackground(Void... params) {
 		  // TODO Auto-generated method stub
 			 // send data to server and store result to variable
-			 Result = getRequest(Name, Alamat, Email, Name2, Date_n_Time, Phone, OrderList, Comment);
+			 Result = getRequest(Name, Alamat,Provinsi , Kota , Keca , Kelu , Email, Name2, Date_n_Time, Phone, OrderList, Comment);
 		  return null;
 		 }
 
@@ -554,8 +488,8 @@ public class ActivityCheckout extends AppCompatActivity {
 			// if finish, dismis progress dialog and show toast message
 			dialog.dismiss();
 			resultAlert(Result);
-
-
+			
+			
 		}
 	}
 
@@ -572,18 +506,22 @@ public class ActivityCheckout extends AppCompatActivity {
 			Log.d("HasilProses", HasilProses);
 		}
 	}
-
+	
     // method to post data to server
-	public String getRequest(String name, String alamat, String email, String name2, String date_n_time, String phone, String orderlist, String comment){
+	public String getRequest(String name, String alamat, String kelu,String keca, String kota, String provinsi, String email, String name2, String date_n_time, String phone, String orderlist, String comment){
 		String result = "";
-
+		
         HttpClient client = new DefaultHttpClient();
         HttpPost request = new HttpPost(Config.ADMIN_PANEL_URL + "/api/add-reservation.php");
-
+        
         try{
         	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(6);
         	nameValuePairs.add(new BasicNameValuePair("name", name));
         	nameValuePairs.add(new BasicNameValuePair("alamat", alamat));
+        	nameValuePairs.add(new BasicNameValuePair("provinsi", provinsi));
+			nameValuePairs.add(new BasicNameValuePair("kota", kota));
+			nameValuePairs.add(new BasicNameValuePair("kecamatan", keca));
+			nameValuePairs.add(new BasicNameValuePair("kelurahan", kelu));
         	nameValuePairs.add(new BasicNameValuePair("email", email));
             nameValuePairs.add(new BasicNameValuePair("name2", name2));
             nameValuePairs.add(new BasicNameValuePair("date_n_time", date_n_time));
@@ -619,38 +557,38 @@ public class ActivityCheckout extends AppCompatActivity {
 
 	// method to get data from database
     public void getDataFromDatabase(){
-
+    	
     	data = dbhelper.getAllData();
 
     	double Order_price = 0;
     	double Total_price = 0;
     	double tax = 0;
-
+    	
     	// store all data to variables
     	for(int i=0;i<data.size();i++){
     		ArrayList<Object> row = data.get(i);
-
+    		
     		String Menu_name = row.get(1).toString();
     		String Quantity = row.get(2).toString();
     		double Sub_total_price = Double.parseDouble(formatData.format(Double.parseDouble(row.get(3).toString())));
     		Order_price += Sub_total_price;
-
+    		
     		// calculate order price
     		OrderList += (Quantity+" "+Menu_name+" "+Sub_total_price+" "+Currency+",\n");
     	}
-
+    	
     	if(OrderList.equalsIgnoreCase("")){
     		OrderList += getString(R.string.no_order_menu);
     	}
-
+    	
     	tax = Double.parseDouble(formatData.format(Order_price *(Tax /100)));
     	Total_price = Double.parseDouble(formatData.format(Order_price - tax));
     	OrderList += "\nOrder: "+Order_price+" "+Currency+
-    			"\nTax: "+Tax+"%: "+tax+" "+Currency+
+    			"\nPotongan: "+Tax+"%: "+tax+" "+Currency+
     			"\nTotal: "+Total_price+" "+Currency;
     	edtOrderList.setText(OrderList);
     }
-
+    
     // method to format date
     private static String pad(int c) {
         if (c >= 10){
@@ -668,7 +606,7 @@ public class ActivityCheckout extends AppCompatActivity {
     	dbhelper.close();
     	finish();
     }
-
+    
     @Override
 	public void onConfigurationChanged(final Configuration newConfig)
 	{

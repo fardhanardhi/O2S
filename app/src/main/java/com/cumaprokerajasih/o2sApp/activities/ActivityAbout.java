@@ -69,9 +69,6 @@ public class ActivityAbout extends AppCompatActivity {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appName)));
                     }
                 }
-                if (position == 6) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.more_apps))));
-                }
             }
         });
 

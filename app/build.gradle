@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 23
     buildToolsVersion "23.0.2"
 
     defaultConfig {
@@ -9,7 +9,7 @@ android {
 
 
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 23
         versionCode 7
         versionName '1.1.6'
     }
@@ -40,5 +40,4 @@ dependencies {
     compile 'com.google.android.gms:play-services-gcm:9.0.2'
     compile 'com.google.android.gms:play-services-analytics:9.0.2'
     compile 'com.google.android.gms:play-services-location:9.0.2'
-    compile 'com.github.farizdotid:actdaerahindonesia:1.0'
 }

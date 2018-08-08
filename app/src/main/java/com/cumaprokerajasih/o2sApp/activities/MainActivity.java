@@ -8,12 +8,14 @@ import android.content.pm.PackageManager;
 import android.database.SQLException;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,10 +34,25 @@ import com.cumaprokerajasih.o2sApp.analytics.Analytics;
 import com.cumaprokerajasih.o2sApp.fragments.FragmentHome;
 import com.cumaprokerajasih.o2sApp.utilities.DBHelper;
 import com.cumaprokerajasih.o2sApp.utilities.utils;
+import com.viewpagerindicator.CirclePageIndicator;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static ViewPager mPager;
+    private static int currentPage = 0;
+    private static int NUM_PAGES = 0;
+    private ArrayList<ImageModel> imageModelArrayList;
+
+    private int[] myImageList = new int[]{
+            R.drawable.image_1, R.drawable.image_2,
+            R.drawable.image_3,R.drawable.image_4
+            ,R.drawable.image_5,R.drawable.image_6
+    };
 
     static DBHelper dbhelper;
     Toolbar toolbar;
@@ -50,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        imageModelArrayList = new ArrayList<>();
+        imageModelArrayList = populateList();
+
+        init();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.help);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -130,6 +152,77 @@ public class MainActivity extends AppCompatActivity {
         }
 
         isStoragePermissionGranted();
+
+    }
+
+    private ArrayList<ImageModel> populateList(){
+
+        ArrayList<ImageModel> list = new ArrayList<>();
+
+        for(int i = 0; i < 6; i++){
+            ImageModel imageModel = new ImageModel();
+            imageModel.setImage_drawable(myImageList[i]);
+            list.add(imageModel);
+        }
+
+        return list;
+    }
+
+    private void init() {
+
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager.setAdapter(new SlidingImage_Adapter(MainActivity.this,imageModelArrayList));
+
+        CirclePageIndicator indicator = (CirclePageIndicator)
+                findViewById(R.id.indicator);
+
+        indicator.setViewPager(mPager);
+
+        final float density = getResources().getDisplayMetrics().density;
+
+//Set circle indicator radius
+        indicator.setRadius(5 * density);
+
+        NUM_PAGES =imageModelArrayList.size();
+
+        // Auto start of viewpager (auto slide)
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+                if (currentPage == NUM_PAGES) {
+                    currentPage = 0;
+                }
+                mPager.setCurrentItem(currentPage++, true);
+            }
+        };
+        Timer swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 3000, 3000);
+        // END Auto start of viewpager (auto slide)
+
+        // Pager listener over indicator
+        indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageSelected(int position) {
+                currentPage = position;
+
+            }
+
+            @Override
+            public void onPageScrolled(int pos, float arg1, int arg2) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int pos) {
+
+            }
+        });
 
     }
 

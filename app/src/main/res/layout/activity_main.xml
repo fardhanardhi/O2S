@@ -17,6 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -25,8 +27,16 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
+        <FrameLayout
+            android:id="@+id/frame_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar" />
+
         <RelativeLayout
-            android:layout_width="fill_parent"
+            android:id="@+id/imgSlider"
+            android:layout_below="@id/frame_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
             <android.support.v4.view.ViewPager
@@ -48,13 +58,6 @@
                 app:pageColor="#fff"
                 app:snap="false" />
         </RelativeLayout>
-
-        <FrameLayout
-            android:id="@+id/frame_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/relativeLayout"
-            android:layout_below="@+id/toolbar" />
 
         <RelativeLayout
             android:id="@+id/relativeLayout"

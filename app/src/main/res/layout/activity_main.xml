@@ -38,16 +38,21 @@
             android:layout_height="10dp"
             android:background="@color/ColorPrimary"
             android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="#4CAF50"></LinearLayout>
+                android:background="#4CAF50">
+
+            </LinearLayout>
             <LinearLayout
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="#FFC107"></LinearLayout>
+                android:background="#FFC107">
+
+            </LinearLayout>
         </LinearLayout>
 
         <RelativeLayout
@@ -77,24 +82,50 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="20dp"
+            android:layout_above="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/white"
+                android:textSize="45sp"
+                android:id="@+id/promoTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Keripik Tempe\nDiskon 50%"/>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:visibility="@string/drawer_visibility">
 
-            <TextView
-                android:text=""
+            <RelativeLayout
+                android:id="@+id/btnContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/debug_view"
-                android:visibility="gone"/>
+                android:layout_alignParentLeft="true"
+                android:layout_margin="20dp">
+
+                <Button
+                    android:id ="@+id/pilihBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Pilih Barang"
+                    android:textColor="#FBD3BD"
+                    android:background="@drawable/button_bg_rounded_corners"
+                    android:padding="18dp"
+                    />
+            </RelativeLayout>
+
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/help"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
                 android:layout_alignParentRight="true"
                 android:paddingRight="10dp"
                 android:paddingBottom="10dp"

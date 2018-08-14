@@ -25,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.net.Uri;
@@ -62,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
     FragmentTransaction mFragmentTransaction;
     static final String TAG = "MainActivity";
 
+    public int posImg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +75,43 @@ public class MainActivity extends AppCompatActivity {
         imageModelArrayList = populateList();
 
         init();
+
+
+
+        Button pilihImg = (Button) findViewById(R.id.pilihBtn);
+        pilihImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                // intent nang activity seng dituju
+                if (posImg == 0) {
+                    // jika button diklik pas slide pertama
+                    alertDialog.setMessage("Ngarah nang intent activity slide pertama");
+                }
+                else if (posImg == 1) {
+                    // jika button diklik pas slide kedua
+                    alertDialog.setMessage("Ngarah nang intent activity slide kedua");
+                }
+                else if (posImg == 2) {
+                    // jika button diklik pas slide ketiga
+                    alertDialog.setMessage("Ngarah nang intent activity slide ketiga");
+                }
+                else if (posImg == 3) {
+                    // jika button diklik pas slide keempat
+                    alertDialog.setMessage("Ngarah nang intent activity slide keempat");
+                }
+                else if (posImg == 4) {
+                    // jika button diklik pas slide kelima
+                    alertDialog.setMessage("Ngarah nang intent activity slide kelima");
+                }
+                else if (posImg == 5) {
+                    // jika button diklik pas slide keenam
+                    alertDialog.setMessage("Ngarah nang intent activity slide keenam");
+                }
+                alertDialog.show();
+            }
+        });
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.help);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -210,6 +250,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 currentPage = position;
+                posImg = currentPage;
+
+                if (posImg == 0) {
+                    ((TextView)findViewById(R.id.promoTxt)).setText("Keripik Tempe\nDiskon 50%");
+                }
+                else if (posImg == 1) {
+                    ((TextView)findViewById(R.id.promoTxt)).setText("Keripik Pisang\nDiskon 60%");
+                }
+                else if (posImg == 2) {
+                    ((TextView)findViewById(R.id.promoTxt)).setText("Keripik Bayam\nDiskon 70%");
+                }
+                else if (posImg == 3) {
+                    ((TextView)findViewById(R.id.promoTxt)).setText("Keripik Nanas\nDiskon 80%");
+                }
+                else if (posImg == 4) {
+                    ((TextView)findViewById(R.id.promoTxt)).setText("Keripik Kentang\nDiskon 90%");
+                }
+                else if (posImg == 5) {
+                    ((TextView)findViewById(R.id.promoTxt)).setText("Keripik Singkong\nDiskon 100%");
+                }
 
             }
 

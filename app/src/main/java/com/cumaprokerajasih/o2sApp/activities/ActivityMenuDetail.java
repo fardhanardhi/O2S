@@ -78,6 +78,7 @@ public class ActivityMenuDetail extends AppCompatActivity {
     long Menu_ID;
     String MenuDetailAPI;
     int IOConnect = 0;
+    int quantity = 0;
 
     DecimalFormat formatData = new DecimalFormat("#.##");
 
@@ -197,11 +198,11 @@ public class ActivityMenuDetail extends AppCompatActivity {
         alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String temp = edtQuantity.getText().toString();
-                int quantity = 0;
+
 
                 // when add button clicked add menu to order table in database
                 if (!temp.equalsIgnoreCase("")) {
-                    quantity = Integer.parseInt(temp);
+                    quantity += Integer.parseInt(temp);
                     Toast.makeText(getApplicationContext(), "Success add product to cart", Toast.LENGTH_SHORT).show();
 
                     if (dbhelper.isDataExist(Menu_ID)) {
